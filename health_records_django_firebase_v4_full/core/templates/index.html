@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Health Records – Login / Register</title>
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+<body class="auth-body">
+  <main class="card auth-card">
+    <h1>Cloud Health Records</h1>
+
+    <section class="card-section">
+      <h2>Create account</h2>
+      <label>Email <input id="regEmail" type="email" autocomplete="email" /></label>
+      <label>Password <input id="regPassword" type="password" autocomplete="new-password" /></label>
+      <label>Role
+        <select id="regRole">
+          <option value="patient">Patient</option>
+          <option value="doctor">Doctor</option>
+        </select>
+      </label>
+      <div id="doctorEnrollWrap" style="display:none;">
+        <label>Doctor Enroll Code
+          <input id="doctorEnrollCode" type="password" placeholder="Ask admin for code"/>
+        </label>
+      </div>
+      <button id="btnRegister">Register</button>
+    </section>
+
+    <section class="card-section">
+      <h2>Login</h2>
+
+      <div style="display:flex; gap:10px; align-items:center; margin:8px 0;">
+        <label><input type="radio" name="loginMode" id="modeEmail" checked> Email</label>
+        <label><input type="radio" name="loginMode" id="modeUid"> UID</label>
+      </div>
+
+      <div id="loginByEmail">
+        <label>Email <input id="loginEmail" type="email" autocomplete="email" /></label>
+      </div>
+
+      <div id="loginByUid" style="display:none;">
+        <label>UID <input id="loginUid" type="text" placeholder="Paste your Firebase UID" /></label>
+      </div>
+
+      <label>Password <input id="loginPassword" type="password" autocomplete="current-password" /></label>
+      <button id="btnLogin">Login</button>
+    </section>
+
+    <p id="msg" class="muted"></p>
+  </main>
+
+  <script>
+    window.firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_PROJECT_ID.appspot.com",
+      appId: "YOUR_APP_ID"
+    };
+    window.DOCTOR_ENROLL_CODE = "CHANGE_ME_DOCTOR_CODE";
+  </script>
+
+  <script type="module" src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js"></script>
+  <script type="module" src="{% static 'app-auth.js' %}"></script>
+</body>
+</html>
